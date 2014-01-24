@@ -29,8 +29,9 @@ void setup() {
   doPoly = false;
   vertex = new float[2];
   snapDist = 25;
-  arrPolygons = new Poly[50];
-  
+  arrPolygons = new Poly[5000];
+  //Poly[] arrPolygons = {};
+
   stroke(0, 0, 0, 100);
   noFill();
 }
@@ -53,18 +54,7 @@ void draw() {
   if (polyCnt > 0) {
     for (int i = 0; i < polyCnt; i++) {  
       polygon = arrPolygons[i];
-      int vertexCnt = polygon.vertexCnt;
-      pushStyle();
-      noFill();
-      beginShape();
-      for (int j = 0; j < vertexCnt; j++) {
-        vert = polygon.verts[j];
-        ptX = vert.x;
-        ptY = vert.y;
-        vertex(ptX, ptY);
-      }
-      endShape();
-      popStyle();
+      polygon.display();
     }
   }
   ///if ortho is true set end point otrhographic to prev vertex 
@@ -126,7 +116,8 @@ void mousePressed() {
   ///create array of vertices to hold active vertex sequence
   if (doPoly == false) {
     doPoly = true;
-    arrVerts = new Vertex [100];
+    arrVerts = new Vertex [1000];
+    //Vertex[]arrVerts = {};
     vertex[0] = mouseX;
     vertex[1] = mouseY;
     ptSx = vertex[0] ;
@@ -142,28 +133,19 @@ void mousePressed() {
   vert.y = vertex[1];
   ptCnt++;
   arrVerts[ptCnt-1] = vert;
-
+  //arrVerts = (Vertex[])append(arrVerts,vert);
   if (closed == true) {
-    arrPolygons[polyCnt] = new Poly();
-    polygon = arrPolygons[polyCnt];
-    polygon.verts = new Vertex [ptCnt];
-    polygon.vertexCnt = ptCnt;
-    polyCnt++;
-    //pass vertices from active array to Polygon object
-    for (int i=0; i<ptCnt; i++) {
-      polygon.verts[i] = arrVerts[i];
+    vertsToPoly();
+    if (polyCnt > 1) {
+      // function to propogate previous polys
+      polyProp();
     }
-    closed = false;
-    doPoly = false;
-    ptCnt = 0;
   }
 }
 
 void keyReleased () {
-  if (keyCode == ENTER) {
-    //ptCnt = 0;
-    doPoly = false;
-    closed = false;
+  if (keyCode == ENTER) {    
+    vertsToPoly();
   }
 }
 
