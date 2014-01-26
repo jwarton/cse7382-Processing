@@ -34,6 +34,9 @@ class Poly {
     }
     endShape();
     popStyle();
+    stroke(255,0,0);
+    ellipse(pos.x,pos.y,5,5);
+    
   }
   void select() {
     

@@ -138,7 +138,7 @@ void mousePressed() {
     vertsToPoly();
     if (polyCnt > 1) {
       // function to propogate previous polys
-      polyProp();
+      //polyProp();
     }
   }
 }
