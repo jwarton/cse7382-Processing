@@ -4,15 +4,6 @@ class Vertex {
 
 class Poly {
   Vertex pos;
-  boolean doClose;
-  boolean doFill;
-  int vertexCnt;
-  Vertex[] verts;class Vertex {
-  float x, y, z;
-}
-
-class Poly {
-  Vertex pos;
   int vertexCnt;
   Vertex[] verts;
   boolean doClose;
@@ -50,7 +41,4 @@ class Poly {
     
   }
 }
-
-}
-
 
