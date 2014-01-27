@@ -17,6 +17,12 @@ class Poly {
   }
 
   void display() {
+    pushMatrix();
+    translate(pos.x, pos.y);
+    stroke(0, 0, 0);
+    noFill();
+    ellipse(0, 0, 3, 3);
+
     pushStyle();
     if (doFill == true) {
       fill(colFill);
@@ -34,14 +40,17 @@ class Poly {
     }
     endShape();
     popStyle();
-    stroke(255,0,0);
-    ellipse(pos.x,pos.y,5,5);
     
+        for (int i = 0; i < vertexCnt; i++) {
+      Vertex vert = verts[i];
+      ptX = vert.x;
+      ptY = vert.y;
+      ellipse(ptX, ptY, 3, 3);
+    }
+    
+    popMatrix();
   }
   void select() {
-    
-    
-    
   }
 }
 

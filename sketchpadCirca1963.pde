@@ -14,7 +14,8 @@ boolean ortho, closed;
 boolean doPoly;
 float[] vertex;
 Poly polygon;
-Poly[] arrPolygons;
+Poly[] arrPolygons ={};
+//Poly[] arrPolygons;
 Vertex vert;
 Vertex vertNear;
 Vertex[] arrVerts;
@@ -29,8 +30,7 @@ void setup() {
   doPoly = false;
   vertex = new float[2];
   snapDist = 25;
-  arrPolygons = new Poly[5000];
-  //Poly[] arrPolygons = {};
+  //arrPolygons = new Poly[5000];
 
   stroke(0, 0, 0, 100);
   noFill();
@@ -52,7 +52,7 @@ void draw() {
   }
   ///draw polgons from array of stored objects
   if (polyCnt > 0) {
-    for (int i = 0; i < polyCnt; i++) {  
+    for (int i = 0; i < arrPolygons.length; i++) {  
       polygon = arrPolygons[i];
       polygon.display();
     }
@@ -138,7 +138,7 @@ void mousePressed() {
     vertsToPoly();
     if (polyCnt > 1) {
       // function to propogate previous polys
-      //polyProp();
+      polyProp();
     }
   }
 }

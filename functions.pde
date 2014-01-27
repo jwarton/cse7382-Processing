@@ -1,29 +1,3 @@
-void vertsToPoly() {
-
-  arrPolygons[polyCnt] = new Poly();
-  polygon = arrPolygons[polyCnt];
-  polygon.verts = new Vertex [ptCnt];
-  polygon.vertexCnt = ptCnt;
-  polyCnt++;
-
-  //define position of polygon
-  polyPos();
-
-  //pass vertices from active array to Polygon object
-  for (int i=0; i<ptCnt; i++) {
-    polygon.verts[i] = arrVerts[i];
-  }
-  if (closed == true) {
-    polygon.doFill = true;
-  } 
-  else {
-    polygon.doFill = false;
-  }
-  closed = false;
-  doPoly = false;
-  ptCnt = 0;
-};
-
 void polyPos() {
   float x, minX, maxX;
   float y, minY, maxY;
@@ -65,7 +39,7 @@ void polyPos() {
       maxZ = curVert.z;
     }
   }
-  ////calculate position based on min max vertex coordinated
+  ////calculate position based on min/max vertex coordinated
   pos = new Vertex();
   pos.x = minX + ((maxX - minX)/2);
   pos.y = minY + ((maxY - minY)/2);
@@ -74,20 +48,63 @@ void polyPos() {
   polygon.pos = pos;
 }
 
-void polyProp() {
-  int val = polyCnt;
-  //pushMatrix();
-  //translate(50, 50);
-  for (int i = 0; i < val; i++) {
-    arrPolygons[polyCnt] = arrPolygons[i];
-    arrPolygons[polyCnt].colFill = color(i, i, 50, 20);
-    int vertCnt0 =  arrPolygons[polyCnt].vertexCnt;
-    for (int j = 0; j < vertCnt0; j++) {
-      arrPolygons[i].verts[j].x = arrPolygons[polyCnt].verts[j].x-5;
-      arrPolygons[i].verts[j].y = arrPolygons[polyCnt].verts[j].y-25;
-    }
-    polyCnt++;
+void vertsToPoly() {
+  Vertex currentVert;
+  Vertex vertPos;
+
+  polygon = new Poly();
+  arrPolygons = (Poly[])append(arrPolygons, polygon);
+  polygon.verts = new Vertex [ptCnt];
+  polygon.vertexCnt = ptCnt;
+  polyCnt++;
+  //define position of polygon
+  polyPos();
+  //pass vertices from active array to Polygon object
+  for (int i=0; i<ptCnt; i++) {
+    currentVert = arrVerts[i];
+    vertPos = new Vertex();
+    vertPos.x = currentVert.x - polygon.pos.x;
+    vertPos.y = currentVert.y - polygon.pos.y;
+    vertPos.z = currentVert.z - polygon.pos.z;
+    polygon.verts[i] = vertPos;
   }
-  //popMatrix();
+  if (closed == true) {
+    polygon.doFill = true;
+  } 
+  else {
+    polygon.doFill = false;
+  }
+  closed = false;
+  doPoly = false;
+  ptCnt = 0;
+};
+
+void polyProp() {
+  Vertex vertPos;
+
+  int arrLen = arrPolygons.length;
+  for (int i = 0; i < arrLen; i++) {
+    polygon = new Poly();
+    polygon.pos = arrPolygons[i].pos;
+    polygon.vertexCnt = arrPolygons[i].vertexCnt;
+    polygon.verts = new Vertex [polygon.vertexCnt];
+
+    for (int j = 0; j < polygon.vertexCnt; j++) {
+      vertPos = new Vertex();
+      vertPos.x = arrPolygons[i].verts[j].x - (i*3);
+      vertPos.y = arrPolygons[i].verts[j].y - (i*2);
+      vertPos.z = arrPolygons[i].verts[j].z;
+      polygon.verts[j] = vertPos;
+    }
+    float alpha = 255 - (255/arrLen);
+    polygon.doClose = arrPolygons[i].doClose;
+    polygon.doFill = arrPolygons[i].doFill; //false;  //
+    polygon.colFill = color(i, i, 50, 20);
+    polygon.colStroke = color(i, i, 50, alpha);
+  
+    arrPolygons = (Poly[])append(arrPolygons, polygon);
+    polyCnt = arrPolygons.length;
+    println(polyCnt);
+  }
 }
 
