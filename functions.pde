@@ -81,7 +81,6 @@ void vertsToPoly() {
 
 void polyProp() {
   Vertex vertPos;
-
   int arrLen = arrPolygons.length;
   for (int i = 0; i < arrLen; i++) {
     polygon = new Poly();
@@ -91,16 +90,18 @@ void polyProp() {
 
     for (int j = 0; j < polygon.vertexCnt; j++) {
       vertPos = new Vertex();
-      vertPos.x = arrPolygons[i].verts[j].x - (i*3);
-      vertPos.y = arrPolygons[i].verts[j].y - (i*2);
+      vertPos.x = arrPolygons[i].verts[j].x;
+      vertPos.y = arrPolygons[i].verts[j].y;
       vertPos.z = arrPolygons[i].verts[j].z;
       polygon.verts[j] = vertPos;
     }
     float alpha = 255 - (255/arrLen);
     polygon.doClose = arrPolygons[i].doClose;
-    polygon.doFill = arrPolygons[i].doFill; //false;  //
+    polygon.doFill = false;  //arrPolygons[i].doFill; //
     polygon.colFill = color(i, i, 50, 20);
     polygon.colStroke = color(i, i, 50, alpha);
+    polygon.rotPoly(15); 
+    polygon.scalePoly(.5); 
   
     arrPolygons = (Poly[])append(arrPolygons, polygon);
     polyCnt = arrPolygons.length;

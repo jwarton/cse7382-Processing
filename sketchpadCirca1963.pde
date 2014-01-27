@@ -111,7 +111,6 @@ void draw() {
 
 void mouseReleased() {
 }
-
 void mousePressed() {
   ///create array of vertices to hold active vertex sequence
   if (doPoly == false) {

@@ -40,17 +40,30 @@ class Poly {
     }
     endShape();
     popStyle();
-    
-        for (int i = 0; i < vertexCnt; i++) {
+
+    for (int i = 0; i < vertexCnt; i++) {
       Vertex vert = verts[i];
       ptX = vert.x;
       ptY = vert.y;
-      ellipse(ptX, ptY, 3, 3);
     }
-    
+
     popMatrix();
   }
   void select() {
+  }
+
+  void rotPoly(float theta) {
+    theta = (PI/180)*theta;
+    for (int i = 0; i < vertexCnt; i++) {
+      verts[i].x = (verts[i].x) * cos(theta) - (verts[i].y) * sin(theta);
+      verts[i].y = (verts[i].x) * sin(theta) + (verts[i].y) * cos(theta);
+    }
+  }
+  void scalePoly(float scaleFactor) {
+    for (int i = 0; i < vertexCnt; i++) {
+      verts[i].x *= scaleFactor;
+      verts[i].y *= scaleFactor;
+    }
   }
 }
 
