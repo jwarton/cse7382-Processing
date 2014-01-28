@@ -97,11 +97,12 @@ void polyProp() {
     }
     float alpha = 255 - (255/arrLen);
     polygon.doClose = arrPolygons[i].doClose;
-    polygon.doFill = false;  //arrPolygons[i].doFill; //
-    polygon.colFill = color(i, i, 50, 20);
-    polygon.colStroke = color(i, i, 50, alpha);
-    polygon.rotPoly(15); 
+    polygon.doFill = false;
+    polygon.colFill = color(5*i, i, 50, 20);
+    polygon.colStroke = color(5*i, i, 50, alpha);
     polygon.scalePoly(.5); 
+    polygon.rotPoly(2+i); 
+    
   
     arrPolygons = (Poly[])append(arrPolygons, polygon);
     polyCnt = arrPolygons.length;

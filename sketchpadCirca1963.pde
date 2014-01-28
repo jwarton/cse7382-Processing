@@ -12,10 +12,13 @@ float snap, snapDist;
 int ptCnt, polyCnt;
 boolean ortho, closed;
 boolean doPoly;
+boolean doSelect, selected;
 float[] vertex;
+color pCol;
+
 Poly polygon;
-Poly[] arrPolygons ={};
-//Poly[] arrPolygons;
+Poly[] arrPolygons = {
+};
 Vertex vert;
 Vertex vertNear;
 Vertex[] arrVerts;
@@ -28,9 +31,9 @@ void setup() {
   ortho = false;
   closed = false;
   doPoly = false;
+  selected = false;
   vertex = new float[2];
   snapDist = 25;
-  //arrPolygons = new Poly[5000];
 
   stroke(0, 0, 0, 100);
   noFill();
@@ -50,13 +53,39 @@ void draw() {
   else {
     ortho = false;
   }
+  ///check for mouse proximity for selection
+  float mX = mouseX;
+  float mY = mouseY;
+  for (int i = 0; i<arrPolygons.length;i++) {
+    if ( doSelect == false) {
+      pCol = polygon.colFill;
+    }
+    polygon = arrPolygons[i];
+    float pX = polygon.pos.x;
+    float pY = polygon.pos.y;  
+    float distance = dist(pX, pY, mX, mY);
+    if (doPoly == false & distance<20 | polygon.selected == true) {
+      doSelect = true;
+      polygon.colFill = color(180, 25, 50, 100);
+      if (mousePressed) {
+        polygon.selected = true;
+        float prevX = pmouseX;
+        float prevY = pmouseY;
+        polygon.drag(pX, pY, mX, mY, prevX, prevY);
+      }
+    } 
+    else {
+      polygon.colFill = pCol;
+      doSelect = false;
+    }
+  }
   ///draw polgons from array of stored objects
   if (polyCnt > 0) {
     for (int i = 0; i < arrPolygons.length; i++) {  
       polygon = arrPolygons[i];
       polygon.display();
     }
-  }
+  }  
   ///if ortho is true set end point otrhographic to prev vertex 
   ///else draw end point based on position of mouse
   if (doPoly == true) {
@@ -108,36 +137,41 @@ void draw() {
     popStyle();
   }
 }
-
 void mouseReleased() {
+  for (int i = 0; i < arrPolygons.length; i++) {  
+    polygon = arrPolygons[i];
+    polygon.selected = false;
+  }
 }
 void mousePressed() {
-  ///create array of vertices to hold active vertex sequence
-  if (doPoly == false) {
-    doPoly = true;
-    arrVerts = new Vertex [1000];
-    //Vertex[]arrVerts = {};
-    vertex[0] = mouseX;
-    vertex[1] = mouseY;
-    ptSx = vertex[0] ;
-    ptSy = vertex[1] ;
-  } 
-  else {
-    vertex[0] = ptEx;
-    vertex[1] = ptEy;
-  }
-  ///add new point to array of vetices
-  vert = new Vertex();
-  vert.x = vertex[0];
-  vert.y = vertex[1];
-  ptCnt++;
-  arrVerts[ptCnt-1] = vert;
-  //arrVerts = (Vertex[])append(arrVerts,vert);
-  if (closed == true) {
-    vertsToPoly();
-    if (polyCnt > 1) {
-      // function to propogate previous polys
-      polyProp();
+  if (doSelect == false) {
+    ///create array of vertices to hold active vertex sequence
+    if (doPoly == false) {
+      doPoly = true;
+      arrVerts = new Vertex [1000];
+      //Vertex[]arrVerts = {};
+      vertex[0] = mouseX;
+      vertex[1] = mouseY;
+      ptSx = vertex[0] ;
+      ptSy = vertex[1] ;
+    } 
+    else {
+      vertex[0] = ptEx;
+      vertex[1] = ptEy;
+    }
+    ///add new point to array of vetices
+    vert = new Vertex();
+    vert.x = vertex[0];
+    vert.y = vertex[1];
+    ptCnt++;
+    arrVerts[ptCnt-1] = vert;
+    //arrVerts = (Vertex[])append(arrVerts,vert);
+    if (closed == true) {
+      vertsToPoly();
+      if (polyCnt > 1) {
+        // function to propogate previous polys
+        polyProp();
+      }
     }
   }
 }

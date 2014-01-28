@@ -8,21 +8,22 @@ class Poly {
   Vertex[] verts;
   boolean doClose;
   boolean doFill;
+  boolean selected;
   color colFill;
   color colStroke;
 
   Poly() {
     colFill = color(15, 15, 50, 20);
     colStroke = color(50, 120, 180);
+    selected = false;
   }
 
   void display() {
     pushMatrix();
     translate(pos.x, pos.y);
-    stroke(0, 0, 0);
+    stroke(0, 0, 0,50);
     noFill();
-    ellipse(0, 0, 3, 3);
-
+    ellipse(0, 0, 2, 2);
     pushStyle();
     if (doFill == true) {
       fill(colFill);
@@ -49,7 +50,11 @@ class Poly {
 
     popMatrix();
   }
-  void select() {
+  void drag(float pX, float pY, float mX,float mY, float prevX,float prevY) {
+      pos.x = mX;
+      pos.y = mY;
+      //pos.x = pos.x - (prevX - mX);
+      //pos.y = pos.y - (prevY - mY);
   }
 
   void rotPoly(float theta) {
