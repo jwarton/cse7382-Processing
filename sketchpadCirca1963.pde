@@ -64,7 +64,7 @@ void draw() {
     float pX = polygon.pos.x;
     float pY = polygon.pos.y;  
     float distance = dist(pX, pY, mX, mY);
-    if (doPoly == false & distance<20 | polygon.selected == true) {
+    if (doPoly == false & distance<35 | polygon.selected == true) {
       doSelect = true;
       polygon.colFill = color(180, 25, 50, 100);
       if (mousePressed) {

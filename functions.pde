@@ -100,8 +100,8 @@ void polyProp() {
     polygon.doFill = false;
     polygon.colFill = color(5*i, i, 50, 20);
     polygon.colStroke = color(5*i, i, 50, alpha);
-    polygon.scalePoly(.5); 
-    polygon.rotPoly(2+i); 
+    polygon.scalePoly(.75); 
+    polygon.rotPoly(5*i); 
     
   
     arrPolygons = (Poly[])append(arrPolygons, polygon);
