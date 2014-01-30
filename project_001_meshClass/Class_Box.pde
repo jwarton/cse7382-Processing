@@ -1,14 +1,14 @@
 class Box {
   float dim;
-  Vertex pos;
+  Vec3 pos;
   Vertex verts [];
   Face faces [];
 
   Box() {
-    pos = new Vertex (0,0,0);
+    pos = new Vec3 (0,0,0);
   }
 
-  Box(Vertex pos, float dim) {   
+  Box(Vec3 pos, float dim) {   
     this.pos = pos;
     this.dim = dim; 
     verts = new Vertex[8];

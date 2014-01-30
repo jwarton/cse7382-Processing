@@ -34,24 +34,62 @@ class Face {
     verts[2] = v3;
 
     cent = new Vertex();
-    cent.x = (v1.x + v2.x + v3.x)/3;
-    cent.y = (v1.y + v2.y + v3.y)/3;
-    cent.z = (v1.z + v2.z + v3.z)/3;
+    cent.pos.x = (v1.pos.x + v2.pos.x + v3.pos.x)/3;
+    cent.pos.y = (v1.pos.y + v2.pos.y + v3.pos.y)/3;
+    cent.pos.z = (v1.pos.z + v2.pos.z + v3.pos.z)/3;
     cent.col = color(100, 100, 100, 50);
 
     //initialize new edges
     e1 = new Edge(v1, v2);
     e2 = new Edge(v2, v3);
     e3 = new Edge(v3, v1);
-    
+
     ////store edges by reference;
     Edge[] edges = new Edge[3];
     edges[0] = e1;
     edges[1] = e2;
     edges[2] = e3;
-    
+
     ////store normals by reference;
-    norm = new Normal(cent,v1,v2,v3);
+    norm = new Normal(cent, v1, v2, v3);
+  }
+  
+  Face(Vec3 pt1, Vec3 pt2, Vec3 pt3) {
+    ///set default face color
+    r = 180;
+    g = 15;
+    b = 55;
+    a = 10;
+    col = color(r, g, b, a);
+    
+    v1 = new Vertex(pt1);
+    v2 = new Vertex(pt2);
+    v3 = new Vertex(pt3);    
+
+    Vertex[] verts = new Vertex[3];
+    verts[0] = v1;
+    verts[1] = v2;
+    verts[2] = v3;
+
+    cent = new Vertex();
+    cent.pos.x = (v1.pos.x + v2.pos.x + v3.pos.x)/3;
+    cent.pos.y = (v1.pos.y + v2.pos.y + v3.pos.y)/3;
+    cent.pos.z = (v1.pos.z + v2.pos.z + v3.pos.z)/3;
+    cent.col = color(100, 100, 100, 50);
+
+    //initialize new edges
+    e1 = new Edge(v1, v2);
+    e2 = new Edge(v2, v3);
+    e3 = new Edge(v3, v1);
+
+    ////store edges by reference;
+    Edge[] edges = new Edge[3];
+    edges[0] = e1;
+    edges[1] = e2;
+    edges[2] = e3;
+
+    ////store normals by reference;
+    norm = new Normal(cent, v1, v2, v3);
   }
 
   void display() {
@@ -61,9 +99,9 @@ class Face {
     fill(col);
     //noFill();
     beginShape();
-    vertex(v1.x, v1.y, v1.z);
-    vertex(v2.x, v2.y, v2.z);
-    vertex(v3.x, v3.y, v3.z);
+    vertex(v1.pos.x, v1.pos.y, v1.pos.z);
+    vertex(v2.pos.x, v2.pos.y, v2.pos.z);
+    vertex(v3.pos.x, v3.pos.y, v3.pos.z);
     endShape();
     popStyle();
     /////////////////////////////////////    edges

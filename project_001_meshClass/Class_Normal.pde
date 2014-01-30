@@ -43,7 +43,7 @@ class Normal {
     pushMatrix();
     strokeWeight(1);
     stroke(col);
-    line(ptS.x,ptS.y,ptS.z,ptE.x,ptE.y,ptE.z);    
+    line(ptS.pos.x,ptS.pos.y,ptS.pos.z,ptE.pos.x,ptE.pos.y,ptE.pos.z);    
     popMatrix();
     popStyle();
   }
