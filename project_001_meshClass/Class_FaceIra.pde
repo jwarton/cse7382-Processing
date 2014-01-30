@@ -9,7 +9,7 @@ class Face3 {
     this.v2 = v2;
   }
   
-  Vec2 getNorm(){
+  Vec3 getNorm(){
     
     Vec3 t1 = new Vec3();
     t1.setTo(v1);
@@ -19,10 +19,15 @@ class Face3 {
     t2.setTo(v2);
     t2.sub(v0);
     
-    t0.normalize();
     t1.normalize();
+    t2.normalize();
  
-    return = t0.cross(t1); 
+    return t1.cross(t2); 
+  }
+  
+  void display(){
+  //e1 = new Edge(v0, v1);
+  //e1.display();
   }
   
 }
