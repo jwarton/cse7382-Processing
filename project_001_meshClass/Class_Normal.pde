@@ -1,49 +1,35 @@
 class Normal {
   float r, g, b, a;
   color col;
-  float x1, y1, z1;
-  float magnitude;
-  Vertex ptS, ptE;
-
+  float mag;
+  Vec3 pos;
+  Vec3 vec;
 
   Normal() {
-    r = 255;
-    g = 255;
-    b = 255;
-    a = 255;
-    col = color(r, g, b, a);
   }
 
-  Normal(Vertex ptS) {
+  Normal(Vec3 pos,Vec3 vec,float mag) {
     r = 255;
     g = 255;
     b = 255;
     a = 255;
     col = color(r, g, b, a);
-    this.ptS = ptS;
-    magnitude = 10;
-  }
-  
-    Normal(Vertex ptS, Vertex v1, Vertex v2, Vertex v3) {
-    r = 255;
-    g = 255;
-    b = 255;
-    a = 255;
-    col = color(r, g, b, a);
-    this.ptS = ptS;
+    this.pos = pos;
+    this.vec = vec;
+    this.mag = mag;
     
-    //////cross product of v1,v2,v3 + magnitude
-    //ptE = 
-    
-    //magnitude = 10;
+    vec.add(pos);
+    vec.mult(mag);
+    ///mag equals length of vector with out scaling
+    //mag = sqrt(sq(vec.x)+sq(vec.y)+sq(vec.z));    
   }
-
+    
   void display() {
     pushStyle();
     pushMatrix();
     strokeWeight(1);
     stroke(col);
-    line(ptS.pos.x,ptS.pos.y,ptS.pos.z,ptE.pos.x,ptE.pos.y,ptE.pos.z);    
+    line(pos.x, pos.y, pos.z, vec.x, vec.y, vec.z);    
     popMatrix();
     popStyle();
   }
