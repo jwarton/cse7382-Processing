@@ -4,25 +4,36 @@ class Normal {
   float mag;
   Vec3 pos;
   Vec3 vec;
+  //Vec3 ptE;
 
   Normal() {
   }
 
   Normal(Vec3 pos,Vec3 vec,float mag) {
-    r = 255;
-    g = 255;
-    b = 255;
-    a = 255;
+    r = 235;
+    g = 195;
+    b = 55;
+    a = 105;
     col = color(r, g, b, a);
     this.pos = pos;
     this.vec = vec;
     this.mag = mag;
     
-    vec.add(pos);
-    vec.mult(mag);
-    ///mag equals length of vector with out scaling
-    //mag = sqrt(sq(vec.x)+sq(vec.y)+sq(vec.z));    
+    vec.mult(mag);            ///multiply vector components by factor | scales vector length
+    Vec3 v0 = new Vec3();     ///temporary vector
+      v0.setTo(vec);          ///set values in temporary vector to vector normal
+    v0.add(pos);              ///moves point according to direction and length vector
+    vec.setTo(v0);
   }
+  
+  float lenNorm(){
+    Vec3 t1 = new Vec3();
+    t1.setTo(pos);
+    vec.sub(t1);
+    return t1.mag();
+    ///mag equals length of vector with out scaling
+    //mag = sqrt(sq(vec.x)+sq(vec.y)+sq(vec.z));  
+}
     
   void display() {
     pushStyle();

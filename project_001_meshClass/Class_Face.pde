@@ -6,6 +6,7 @@ class Face {
   Edge e1, e2, e3;
   Edge edges [];
   Vec3 cent;
+  Vertex c0;
   Vec3 normal;
   Normal n0, n1, n2, n3; 
 
@@ -38,7 +39,8 @@ class Face {
     cent.x = (v1.pos.x + v2.pos.x + v3.pos.x)/3;
     cent.y = (v1.pos.y + v2.pos.y + v3.pos.y)/3;
     cent.z = (v1.pos.z + v2.pos.z + v3.pos.z)/3;
-    //cent.col = color(100, 100, 100, 50);
+    c0 = new Vertex(cent);
+    c0.col = color(100, 100, 100, 50);
 
     //initialize new edges
     e1 = new Edge(v1, v2);
@@ -52,11 +54,9 @@ class Face {
     edges[2] = e3;
     
     ////store normals by reference;
-    //normal = new Normal(cent, v1, v2, v3);
     normal = new Vec3();
     normal = getNorm();
-    n0 = new Normal(cent,normal,15);
-
+    n0 = new Normal(cent,normal,25);
   }
 
   Face(Vec3 pt1, Vec3 pt2, Vec3 pt3) {
@@ -97,7 +97,7 @@ class Face {
     //normal = new Normal(cent, v1, v2, v3);
     normal = new Vec3();
     normal = getNorm();
-    n0 = new Normal(cent,normal,1);
+    n0 = new Normal(cent,normal,2);
   }
     
     ////get normal from vertices
@@ -137,7 +137,7 @@ class Face {
     v2.display();
     v3.display();
     /////////////////////////////////////    centroid
-    //cent.display();
+    c0.display();
     /////////////////////////////////////    normals
     n0.display();
     //n1.display();

@@ -1,6 +1,5 @@
 class Vec3{
 float x,y,z;
-
 Vec3(){
 }
 
@@ -14,25 +13,25 @@ void add(float s){
 }
 
 void add(Vec3 v){
-  this.x += v.x;
-  this.y += v.y;
-  this.z += v.z;
+  x += v.x;
+  y += v.y;
+  z += v.z;
 }
 void sub(Vec3 v){
-  this.x -= v.x;
-  this.y -= v.y;
-  this.z -= v.z;
+  x -= v.x;
+  y -= v.y;
+  z -= v.z;
 }
 
 void mult(float s){
-  this.x *= s;
-  this.y *= s;
-  this.z *= s;
+  x *= s;
+  y *= s;
+  z *= s;
 }
 void div(float s){
-  this.x /= s;
-  this.y /= s;
-  this.z /= s;
+  x /= s;
+  y /= s;
+  z /= s;
 }
 
 void setTo(Vec3 v){
