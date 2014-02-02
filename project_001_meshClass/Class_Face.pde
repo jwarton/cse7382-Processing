@@ -56,7 +56,7 @@ class Face {
     ////store normals by reference;
     normal = new Vec3();
     normal = getNorm();
-    n0 = new Normal(cent,normal,25);
+    this.n0 = new Normal(cent,normal,50);
   }
 
   Face(Vec3 pt1, Vec3 pt2, Vec3 pt3) {
