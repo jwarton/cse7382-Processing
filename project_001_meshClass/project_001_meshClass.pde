@@ -46,15 +46,17 @@ void draw() {
   b1 = new Box(vect0, 150);
   b1.display();
   
-  col = color(250,250,250);
+  col = color(250,250,250,50);
   //add array to store boxes positioned to face normals
   for (int i = 0; i < b1.faces.length; i++) {
     pushMatrix();
     pos = new Vec3(b1.faces[i].n0.vec.x, b1.faces[i].n0.vec.y, b1.faces[i].n0.vec.z);
     translate(pos.x, pos.y, pos.z);
-    fill(col);
+    //fill(col);
+    noFill();
     stroke(col);
-    sphere(3);
+    box(8);
+    //sphere(3);
     //bTemp = new Box(pos,10);
     //bTemp.display();
     popMatrix();
