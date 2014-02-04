@@ -43,6 +43,11 @@ void draw() {
   f1 = new Face(vect0, vect1, vect2);
   //f1.display();
 
+
+  Matrix4x4 m0 = new Matrix4x4(vect0);
+  m0.mTranslate(vect1);
+  m0.mRotateX(90);
+
   b1 = new Box(vect0, 150);
   b1.display();
   

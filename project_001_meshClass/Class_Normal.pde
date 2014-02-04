@@ -4,7 +4,6 @@ class Normal {
   float mag;
   Vec3 pos;
   Vec3 vec;
-  //Vec3 ptE;
 
   Normal() {
   }

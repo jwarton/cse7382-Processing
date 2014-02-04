@@ -1,110 +1,101 @@
 class Matrix4x4 {
-  float 1a, 1b, 1c, 1d;
-  float 2a, 2b, 2c, 2d;
-  float 3a, 3b, 3c, 3d;
-  float 4a, 4b, 4c, 4d;
+  float a1, b1, c1, d1;
+  float a2, b2, c2, d2;
+  float a3, b3, c3, d3;
+  float a4, b4, c4, d4;
   float x, y, z, w;
   Vec3 vector;
-
   Matrix4x4() {
-    1a = 1;
-    1b = 0;
-    1c = 0;
-    1d = 0;
+    a1 = 1;
+    b1 = 0;
+    c1 = 0;
+    d1 = 0;
 
-    2a = 0;
-    2b = 1;
-    2c = 0;
-    2d = 0;
+    a2 = 0;
+    b2 = 1;
+    c2 = 0;
+    d2 = 0;
 
-    3a = 0;
-    3b = 0;
-    3c = 1;
-    3d = 0;
+    a3 = 0;
+    b3 = 0;
+    c3 = 1;
+    d3 = 0;
 
-    4a = 0;
-    4b = 0;
-    4c = 0;
-    4d = 1;
+    a4 = 0;
+    b4 = 0;
+    c4 = 0;
+    d4 = 1;
 
     w = 1;
   }
-
   Matrix4x4(Vec3 vector) {
     this.vector = vector;
-    1a = 1;
-    1b = 0;
-    1c = 0;
-    1d = 0;
+    a1 = 1;
+    b1 = 0;
+    c1 = 0;
+    d1 = 0;
 
-    2a = 0;
-    2b = 1;
-    2c = 0;
-    2d = 0;
+    a2 = 0;
+    b2 = 1;
+    c2 = 0;
+    d2 = 0;
 
-    3a = 0;
-    3b = 0;
-    3c = 1;
-    3d = 0;
+    a3 = 0;
+    b3 = 0;
+    c3 = 1;
+    d3 = 0;
 
-    4a = 0;
-    4b = 0;
-    4c = 0;
-    4d = 1;
+    a4 = 0;
+    b4 = 0;
+    c4 = 0;
+    d4 = 1;
 
     x = vector.x;
     y = vector.y;
     z = vector.z;
     w = 1;
   }
-
   void mTranslate(Vec3 delta) {
-    1d = delta.x;
-    2d = delta.y;
-    3d = delta.z;
+    d1 = delta.x;
+    d2 = delta.y;
+    d3 = delta.z;
     run();
   }
-
   void mRotateX(float theta) {
-    2b = cos(theta);
-    2c = sin(theta);
-    3b = sin(theta);
-    3c = cos(theta);
+    b2 = cos(theta);
+    c2 = sin(theta);
+    b3 = sin(theta);
+    c3 = cos(theta);
     run();
   }
-
   void mRotateY(float theta) {
-    1a = cos(theta);
-    1c = sin(theta);
-    3a = sin(theta);
-    3c = cos(theta);
+    a1 = cos(theta);
+    c1 = sin(theta);
+    a3 = sin(theta);
+    c3 = cos(theta);
     run();
   }
-
   void mRotateZ(float theta) {
-    1a = cos(theta);
-    1b = sin(theta);
-    2a = sin(theta);
-    2c = cos(theta);
+    a1 = cos(theta);
+    b1 = sin(theta);
+    a2 = sin(theta);
+    c2 = cos(theta);
     run();
   }
-
   void mScale3d(float scaleFx) {
-    1a = scaleFx;
-    2b = scaleFx;
-    3c = scaleFx;
+    a1 = scaleFx;
+    b2 = scaleFx;
+    c3 = scaleFx;
     run();
   }
-
   void mScale2d(float scaleFx, Vec3 axis) {
   }
   void mScale1d(float scaleFx, Vec3 axis) {
   }
-
   void run() {
-    vector.x = (1a*x)+(1b*y)+(1c*z)+(1d*w);
-    vector.y = (2a*x)+(2b*y)+(2c*z)+(2d*w);
-    vector.z = (3a*x)+(3b*y)+(3c*z)+(3d*w);
+    vector.x = (a1*x)+(b1*y)+(c1*z)+(d1*w);
+    vector.y = (a2*x)+(b2*y)+(c2*z)+(d2*w);
+    vector.z = (a3*x)+(b3*y)+(c3*z)+(d3*w);
   }
 }
 
