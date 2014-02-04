@@ -29,7 +29,7 @@ void draw() {
 
   //plot geometry
   vect0 = new Vec3(0, 0, 0);
-  vect1 = new Vec3(0, 50, -200);
+  vect1 = new Vec3(0, 50, -300);
   vect2 = new Vec3(0, 50, 200); 
 
   v0 = new Vertex(vect0);
@@ -43,15 +43,20 @@ void draw() {
   f1 = new Face(vect0, vect1, vect2);
   //f1.display();
 
-
   Matrix4x4 m0 = new Matrix4x4(vect0);
-  m0.mTranslate(vect1);
-  m0.mRotateX(90);
+  m0.mTranslate(vect2);
 
   b1 = new Box(vect0, 150);
+
+
+  for (int i=0; i<b1.verts.length; i++) {
+    Matrix4x4 m1 = new Matrix4x4(b1.verts[i].pos);
+    m1.mRotateX(90);
+    m1.mTranslate(vect1);
+  }
   b1.display();
-  
-  col = color(250,250,250,50);
+
+  col = color(250, 250, 250, 50);
   //add array to store boxes positioned to face normals
   for (int i = 0; i < b1.faces.length; i++) {
     pushMatrix();
@@ -66,7 +71,7 @@ void draw() {
     //bTemp.display();
     popMatrix();
   }
-  
+
   endCamera();
 }
 
