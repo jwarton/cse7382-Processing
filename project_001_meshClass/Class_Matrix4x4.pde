@@ -55,11 +55,15 @@ class Matrix4x4 {
     z = vector.z;
     w = 1;
   }
-  void mTranslate(Vec3 delta) {
-    d1 = delta.x;
-    d2 = delta.y;
-    d3 = delta.z;
+    void mScale3d(float scaleFx) {
+    a1 = scaleFx;
+    b2 = scaleFx;
+    c3 = scaleFx;
     run();
+  }
+  void mScale2d(float scaleFx, Vec3 axis) {
+  }
+  void mScale1d(float scaleFx, Vec3 axis) {
   }
   void mRotateX(float theta) {
     b2 = cos(theta);
@@ -82,15 +86,14 @@ class Matrix4x4 {
     c2 = cos(theta);
     run();
   }
-  void mScale3d(float scaleFx) {
-    a1 = scaleFx;
-    b2 = scaleFx;
-    c3 = scaleFx;
+  void mTranslate(Vec3 delta) {
+    d1 = delta.x;
+    d2 = delta.y;
+    d3 = delta.z;
+    //a4 = delta.x;
+    //b4 = delta.y;
+    //c4 = delta.z;
     run();
-  }
-  void mScale2d(float scaleFx, Vec3 axis) {
-  }
-  void mScale1d(float scaleFx, Vec3 axis) {
   }
   void run() {
     vector.x = (a1*x)+(b1*y)+(c1*z)+(d1*w);

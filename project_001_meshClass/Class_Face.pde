@@ -55,7 +55,7 @@ class Face {
     
     ////store normals by reference;
     normal = new Vec3();
-    normal = getNorm();
+    normal = setNorm();
     this.n0 = new Normal(cent,normal,50);
   }
 
@@ -75,13 +75,10 @@ class Face {
     verts[0] = v1;
     verts[1] = v2;
     verts[2] = v3;
-
+    
     cent = new Vec3();
-    cent.x = (v1.pos.x + v2.pos.x + v3.pos.x)/3;
-    cent.y = (v1.pos.y + v2.pos.y + v3.pos.y)/3;
-    cent.z = (v1.pos.z + v2.pos.z + v3.pos.z)/3;
-    //cent.col = color(100, 100, 100, 50);
-
+    setCentroid();
+    
     //initialize new edges
     e1 = new Edge(v1, v2);
     e2 = new Edge(v2, v3);
@@ -95,13 +92,18 @@ class Face {
 
     ////store normals by reference;
     //normal = new Normal(cent, v1, v2, v3);
+    
     normal = new Vec3();
-    normal = getNorm();
+    normal = setNorm();
     n0 = new Normal(cent,normal,2);
   }
-    
-    ////get normal from vertices
-  Vec3 getNorm() {
+  void setCentroid(){
+    cent.x = (v1.pos.x + v2.pos.x + v3.pos.x)/3;
+    cent.y = (v1.pos.y + v2.pos.y + v3.pos.y)/3;
+    cent.z = (v1.pos.z + v2.pos.z + v3.pos.z)/3;
+    //cent.col = color(100, 100, 100, 50);
+  }
+  Vec3 setNorm() {
     Vec3 t1 = new Vec3();
     t1.setTo(v2.pos);
     t1.sub(v1.pos);
@@ -114,8 +116,8 @@ class Face {
     t2.normalize();
 
     return t1.cross(t2);
+    //Normal n0 = new Normal(cent,normal,2);
   }
-  
   void display() {
     /////////////////////////////////////    face
     pushStyle();
@@ -137,12 +139,12 @@ class Face {
     v2.display();
     v3.display();
     /////////////////////////////////////    centroid
+    setCentroid();
     c0.display();
     /////////////////////////////////////    normals
+    normal = setNorm();
+    n0 = new Normal(cent,normal,2);
     n0.display();
-    //n1.display();
-    //n2.display();
-    //n3.display();
   }
 }
 

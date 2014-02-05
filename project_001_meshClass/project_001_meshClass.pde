@@ -6,6 +6,7 @@ Vertex v0, v1, v2, v3;
 Edge e1;
 Face f1;
 Box b1, bTemp;
+Tetra tetra01;
 int i;
 color col;
 
@@ -47,14 +48,16 @@ void draw() {
   m0.mTranslate(vect2);
 
   b1 = new Box(vect0, 150);
+  tetra01 = new Tetra(vect1,50);
 
 
   for (int i=0; i<b1.verts.length; i++) {
     Matrix4x4 m1 = new Matrix4x4(b1.verts[i].pos);
-    m1.mRotateX(90);
     m1.mTranslate(vect1);
+    //m1.mRotateX(90);
   }
   b1.display();
+  tetra01.display();
 
   col = color(250, 250, 250, 50);
   //add array to store boxes positioned to face normals
