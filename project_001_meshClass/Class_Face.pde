@@ -116,7 +116,6 @@ class Face {
     t2.normalize();
 
     return t1.cross(t2);
-    //Normal n0 = new Normal(cent,normal,2);
   }
   void display() {
     /////////////////////////////////////    face
@@ -143,7 +142,7 @@ class Face {
     c0.display();
     /////////////////////////////////////    normals
     normal = setNorm();
-    n0 = new Normal(cent,normal,2);
+    n0 = new Normal(cent,normal,25);
     n0.display();
   }
 }

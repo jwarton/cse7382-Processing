@@ -1,12 +1,13 @@
 ///meshClass_Beta
 
 ///global variables
-Vec3 vect0, vect1, vect2, pos;
+Vec3 vect0, vect1, vect2, vect3, pos;
 Vertex v0, v1, v2, v3;
 Edge e1;
 Face f1;
 Box b1, bTemp;
 Tetra tetra01;
+Icosa icosa01;
 int i;
 color col;
 
@@ -23,7 +24,7 @@ void draw() {
   camera();
 
   //translate origin to center of stage
-  translate(250, 650, 0);
+  translate(250, 750, 0);
   rotateX((-PI/180)*125);
   rotateZ((-PI/180)*135); 
   rotateZ((-PI/180)*i); 
@@ -32,23 +33,19 @@ void draw() {
   vect0 = new Vec3(0, 0, 0);
   vect1 = new Vec3(0, 50, -300);
   vect2 = new Vec3(0, 50, 200); 
+  vect3 = new Vec3(0, 100, -500); 
 
   v0 = new Vertex(vect0);
   v1 = new Vertex(vect1);
   v0.display();
-  //v1.display();
-
-  e1 = new Edge(vect0, vect1);
-  //e1.display();
-
-  f1 = new Face(vect0, vect1, vect2);
-  //f1.display();
+  v1.display();
 
   Matrix4x4 m0 = new Matrix4x4(vect0);
   m0.mTranslate(vect2);
 
   b1 = new Box(vect0, 150);
   tetra01 = new Tetra(vect1,50);
+  icosa01 = new Icosa(vect3,180);
 
 
   for (int i=0; i<b1.verts.length; i++) {
@@ -56,8 +53,10 @@ void draw() {
     m1.mTranslate(vect1);
     //m1.mRotateX(90);
   }
+  
   b1.display();
   tetra01.display();
+  icosa01.display();
 
   col = color(250, 250, 250, 50);
   //add array to store boxes positioned to face normals

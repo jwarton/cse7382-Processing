@@ -1,6 +1,6 @@
 class Tetra {
-  float dim;           //defines size 
-  Vec3 pos;            //defines position
+  float dim;           //defines size of shape based on an edge length of dim
+  Vec3 pos;            //defines position based on centroid
   Vertex verts [];     //array contains all vertices
   Face faces [];       //array contains all faces
 
@@ -14,15 +14,23 @@ class Tetra {
     this.dim = dim;
     verts = new Vertex[4];
 
-    verts[0] = new Vertex (pos.x, pos.y, pos.z+(dim*.5));
-
+    ///calculate area of base
+    float area = (((sqrt(3))/4) * sq(dim));
+    ///calculate distance of vertex from face centroid
+    float radius = (1/sqrt(3))*dim;
+    ///calculate height of shape
+    float h = ((sqrt(6)/3)* dim);
+    
+    ///generate peak vetex
+    verts[0] = new Vertex (pos.x, pos.y, pos.z+(.75*h));
+    ///generate base vertices
     for (int i = 0; i<3; i++) {
       float theta = radians(i*120);
-      verts[i+1] = new Vertex ((pos.x+(dim*.5 * cos(theta))), 
-      (pos.y+(dim*.5 * sin(theta))), 
-      (pos.z-(dim*.5)));
+      verts[i+1] = new Vertex ((pos.x+(radius * cos(theta))), 
+      (pos.y+(radius * sin(theta))), 
+      pos.z-(h/4));
     }
-
+    ///generate faces
     faces = new Face[4];
     faces[0] = new Face (verts[0], verts[1], verts[2]);
     faces[1] = new Face (verts[0], verts[2], verts[3]);
