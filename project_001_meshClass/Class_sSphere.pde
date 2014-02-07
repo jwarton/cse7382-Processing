@@ -23,7 +23,7 @@ class Sphere {
     for (int i=0; i<vRows+1; i++) {
       for (int j=0; j<vCols; j++) {
         theta =(2*PI/vCols)*(j);
-        phi = (PI/vRows)*(i);
+        phi = (.25*PI/vRows)*(i+(vRows*.5));
 
         Vertex vertex = new Vertex(
         pos.x +(cos(theta) * sin(phi) * dim), 
@@ -36,36 +36,41 @@ class Sphere {
     faces = new Face [0];
     for (int i=0;i<(verts.length-(vCols)) ;i++) {
       if (i>0) {
-        int val0 = i;
-        int val1 = i-1;
-        int val2 = i-1 + vCols;
-        int val3 = i + vCols;
-
-        Face faceA = new Face (verts[val0], verts[val1], verts[val2]);
-        Face faceB = new Face (verts[val0], verts[val2], verts[val3]);
-
-        if ((i<(vCols))||(i>verts.length-(2*vCols))) {
-          faceA.col= color(55, 255-i, 255-i, 255);                              ///yellow-cyan faces
-          faceB.col= color(255-i, 0, i, 255);
-        } 
-        else {
-          faceA.col= color(i, i, i, 255);                                    ///black to white faces
-          faceB.col= color(i, i, i, 255);
-        }
-        if(i==vCols){
-          faceA.col= color(255, 255, 255, 255);
-          faceB.col= color(0, 255, 255, 255);
-        }
-        
-        if (i>verts.length-(2*vCols)) {
+        if (i%vCols == 0) {
+          int val0 = i-1 ;
+          int val1 = i + (vCols-1);
+          int val2 = i - vCols;
+          int val3 = i;
+          Face faceA = new Face (verts[val0], verts[val1], verts[val2]);
+          Face faceB = new Face (verts[val2], verts[val3], verts[val1]);
+          faceA.col= color(255, 255, 255, 120);                              ///white faces
+          faceB.col= color(255, 255, 255, 120);
           faces = (Face[])append(faces, faceA);
-        } 
-        else {
-          if (i<(vCols)) {
-            faces = (Face[])append(faces, faceB);
+          faces = (Face[])append(faces, faceB);
+        } else {
+          int val0 = i;
+          int val1 = i-1;
+          int val2 = i-1 + vCols;
+          int val3 = i + vCols;
+          Face faceA = new Face (verts[val0], verts[val1], verts[val2]);
+          Face faceB = new Face (verts[val0], verts[val2], verts[val3]);
+
+          if ((i<(vCols))||(i>verts.length-(2*vCols))) {
+            faceA.col= color(255, 255, 0, 255);                              ///yellow faces
+            faceB.col= color(255, 255, 0, 255);
           } else {
+            faceA.col= color(i*.5, i*.5, i*.5, 80);                         ///black to white faces
+            faceB.col= color(i*.5, i*.5, i*.5, 80);
+          }        
+          if (i>verts.length-(2*vCols)) {
             faces = (Face[])append(faces, faceA);
-            faces = (Face[])append(faces, faceB);
+          } else {
+            if (i<(vCols)) {
+              faces = (Face[])append(faces, faceB);
+            } else {
+              faces = (Face[])append(faces, faceA);
+              faces = (Face[])append(faces, faceB);
+            }
           }
         }
       }

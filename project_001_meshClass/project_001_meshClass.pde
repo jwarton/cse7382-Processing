@@ -28,11 +28,11 @@ void draw() {
   translate(250, 750, 0);
   rotateX((-PI/180)*125);
   rotateZ((-PI/180)*135); 
-  rotateZ((-PI/180)*(i)); 
+  rotateZ((-PI/180)*i); 
 
   //plot geometry
   vect0 = new Vec3(0, 0, 0);
-  vect1 = new Vec3(0, 50, -300);
+  vect1 = new Vec3(0, 0, -300);
   vect2 = new Vec3(0, 50, 200); 
   vect3 = new Vec3(0, 100, -500); 
   vect4 = new Vec3(0, -100, -500);
@@ -48,13 +48,13 @@ void draw() {
   b1 = new Box(vect0, 100);
   tetra01 = new Tetra(vect1,50);
   icosa01 = new Icosa(vect3,100);
-  sphere01 = new Sphere(vect4,100,15,20);
+  sphere01 = new Sphere(vect4,100,35,20);
 
 
   for (int i=0; i<b1.verts.length; i++) {
     Matrix4x4 m1 = new Matrix4x4(b1.verts[i].pos);
+    //m1.mRotateY(15);
     m1.mTranslate(vect1);
-    //m1.mRotateX(90);
   }
   
   b1.display();

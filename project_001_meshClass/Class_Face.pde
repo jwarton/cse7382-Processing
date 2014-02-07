@@ -91,7 +91,7 @@ class Face {
     
     normal = new Vec3();
     normal = setNorm();
-    n0 = new Normal(cent,normal,2);
+    n0 = new Normal(cent,normal,1);
   }
   void setCentroid(){
     cent.x = (v1.pos.x + v2.pos.x + v3.pos.x)/3;
@@ -138,7 +138,7 @@ class Face {
     c0.display();
     /////////////////////////////////////    normals
     normal = setNorm();
-    n0 = new Normal(cent,normal,8);
+    n0 = new Normal(cent,normal,12);
     n0.display();
   }
 }
