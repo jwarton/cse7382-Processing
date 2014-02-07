@@ -27,7 +27,7 @@ class Face {
     r = 180;
     g = 15;
     b = 55;
-    a = 10;
+    a = 60;
     col = color(r, g, b, a);
 
     Vertex[] verts = new Vertex[3];
@@ -52,11 +52,7 @@ class Face {
     edges[0] = e1;
     edges[1] = e2;
     edges[2] = e3;
-    
-    ////store normals by reference;
-    normal = new Vec3();
-    normal = setNorm();
-    this.n0 = new Normal(cent,normal,50);
+   
   }
 
   Face(Vec3 pt1, Vec3 pt2, Vec3 pt3) {
@@ -142,7 +138,7 @@ class Face {
     c0.display();
     /////////////////////////////////////    normals
     normal = setNorm();
-    n0 = new Normal(cent,normal,25);
+    n0 = new Normal(cent,normal,20);
     n0.display();
   }
 }
