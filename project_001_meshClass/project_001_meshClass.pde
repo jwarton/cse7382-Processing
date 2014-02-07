@@ -28,7 +28,7 @@ void draw() {
   translate(250, 750, 0);
   rotateX((-PI/180)*125);
   rotateZ((-PI/180)*135); 
-  rotateZ((-PI/180)*i); 
+  rotateZ((-PI/180)*(i)); 
 
   //plot geometry
   vect0 = new Vec3(0, 0, 0);
@@ -48,7 +48,7 @@ void draw() {
   b1 = new Box(vect0, 100);
   tetra01 = new Tetra(vect1,50);
   icosa01 = new Icosa(vect3,100);
-  sphere01 = new Sphere(vect4,100,8);
+  sphere01 = new Sphere(vect4,100,15,20);
 
 
   for (int i=0; i<b1.verts.length; i++) {

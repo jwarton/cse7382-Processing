@@ -138,7 +138,7 @@ class Face {
     c0.display();
     /////////////////////////////////////    normals
     normal = setNorm();
-    n0 = new Normal(cent,normal,20);
+    n0 = new Normal(cent,normal,8);
     n0.display();
   }
 }

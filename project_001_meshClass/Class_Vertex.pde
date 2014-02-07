@@ -33,12 +33,8 @@ class Vertex {
   void display() {
     pushStyle();
     stroke(col);
+    strokeWeight(2);
     point(pos.x,pos.y,pos.z);
-    pushMatrix();
-    translate(pos.x, pos.y, pos.z);
-    fill(col);
-    sphere(1);
-    popMatrix();
     popStyle();
   }
 }
