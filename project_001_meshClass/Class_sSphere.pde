@@ -23,7 +23,7 @@ class Sphere {
     for (int i=0; i<vRows+1; i++) {
       for (int j=0; j<vCols; j++) {
         theta =(2*PI/vCols)*(j);
-        phi = (.25*PI/vRows)*(i+(vRows*.5));
+        phi = ((.25*PI/vRows)*i)+ PI*.05;
 
         Vertex vertex = new Vertex(
         pos.x +(cos(theta) * sin(phi) * dim), 
